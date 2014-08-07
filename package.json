@@ -1,0 +1,33 @@
+{
+    "name": "webexhbs",
+    "description": "Web Templating For Express JS Using Handlebars",
+    "version": "0.0.1",
+    "license": "MIT",
+    "author": "Partha R <parthasarathi.ramanujam@gmail.com>",
+    "main": "index.js",
+    "keywords": [
+    "web",
+    "node",
+    "express",
+    "templates",
+    "handlebars"
+  ],
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/partharamanujam/webexhbs"
+    },
+    "dependencies": {
+        "handlebars": "v2.0.x",
+        "handlebars-layouts": "v0.3.x"
+    },
+    "devDependencies": {
+        "express": "v4.6.x"
+    },
+    "engines": {
+        "node": "v0.10.x",
+        "npm": "v1.4.x"
+    },
+    "scripts": {
+        "test": "echo \"Error: no test specified\" && exit 1"
+    }
+}

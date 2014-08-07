@@ -1,0 +1,36 @@
+<!doctype html>
+<html lang="en-us">
+
+<head>
+    {{#block "head"}}
+    <title>{{title}}</title>
+    {{/block}}
+</head>
+
+<body>
+    <div class="site">
+        <div role="banner">
+            {{#block "header"}}
+            <h1>{{title}}</h1>
+            {{/block}}
+        </div>
+
+        <div role="main">
+            {{#block "body"}}
+            <h2>Hello World</h2>
+            {{/block}}
+        </div>
+
+        <div role="contentinfo">
+            {{#block "footer"}}
+            <small>&copy; 2014</small>
+            {{/block}}
+        </div>
+    </div>
+
+    {{#block "foot"}}
+    <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+    {{/block}}
+</body>
+
+</html>
