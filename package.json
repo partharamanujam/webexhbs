@@ -17,8 +17,9 @@
         "url": "https://github.com/partharamanujam/webexhbs"
     },
     "dependencies": {
-        "handlebars": "v2.0.x",
-        "handlebars-layouts": "v0.3.x"
+        "handlebars": "v1.3.x",
+        "handlebars-layouts": "v0.3.x",
+        "async-waterfall": "v0.1.x"
     },
     "devDependencies": {
         "express": "v4.6.x"

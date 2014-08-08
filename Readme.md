@@ -21,18 +21,16 @@ $ npm install webexhbs
 
   * Templating using [handlebars.js](https://github.com/wycats/handlebars.js)
   * Jade-like layout-blocks using [handlebars-layouts](https://github.com/shannonmoeller/handlebars-layouts)
-  * Express JS compatible view rendering engine - TODO
-  * Background template compilation - TODO
+  * Express JS compatible view rendering engine
   * Redis based caching for multi-instance servers - TODO
+  * Background template compilation - TODO
   * Client-side template-based redering support - TODO
 
 ## Philosophy
 
   One of the many possible implementations of template-based rendering using Handlebars
-  for Express JS including support for layout-blocks and redis-based caching needed
-  for any serious development effort.
-  
-  This is an attempt to provide a one-stop solution to get started...
+  for Express JS including support for layout-blocks and redis-based caching. Support
+  is also provided for client-side templating.
 
 ## APIs
 
@@ -56,15 +54,15 @@ var webexhbs = require('webexhbs'),
     handlebars = webexhbs.handlebars;
 ```
 
-### Handlebars Express JS engine
+### Handlebars engine
 
-  The handlebars engine is export'ed from the main-module to be used as the templating engine in
-  Express JS. 
+  The handlebars engine is export'ed from the main-module to be used within the Express JS
+  environment. It supports async functions typical to Express JS environment.
 
 ```js
-var webexhbs = require('webexhbs'),
+var express = require('express'),
+    webexhbs = require('webexhbs'),
     engine = webexhbs.engine;
-TODO
 ```
 
 ### Handlebars engine-instance: engine.getInstance()
@@ -84,7 +82,7 @@ instance.registerPartial('partial_name', 'partial value');
 
 ### Block-helpers for Jade-like layouts
 
-  The handlebars engine-instance supports Jade-like layouts by adding the block-helpers.
+  The handlebars engine-instance supports Jade-like layouts by adding block-helpers.
   * #extend - extend a defined partial
   * #block - define a block within a partial
   * #append - append to a defined block
@@ -92,6 +90,30 @@ instance.registerPartial('partial_name', 'partial value');
   * #replace - replace a defined block
 
   See standalone.js in examples for usage details.
+
+### Express JS view-engine: engine.renderFile
+
+  Use engine.renderFile as the view-engine for Express JS  environment.
+
+```js
+var express = require('express'),
+    webexhbs = require('webexhbs'),
+    engine = webexhbs.engine;
+
+app = express();
+app.engine('hbs', webexhbs.engine.renderFile);
+```
+
+### Compile templates: engine.compile(filepath, callback)
+
+  Compile handlebar-templates from file.
+
+```js
+var webexhbs = require('webexhbs'),
+    engine = webexhbs.engine;
+
+engine.compile(filePath, function(err, template) { ... });
+```
 
 ## License
 
