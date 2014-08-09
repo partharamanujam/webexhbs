@@ -105,7 +105,7 @@ app = express();
 app.engine('hbs', webexhbs.engine.renderFile);
 ```
 
-### Compile templates: engine.compile(filepath, callback)
+### Compile templates: engine.compile(filepath, [options], callback)
 
   Compile handlebar-templates from file.
 
@@ -116,15 +116,26 @@ var webexhbs = require('webexhbs'),
 engine.compile(filePath, function(err, template) { ... });
 ```
 
-### Precompile templates: engine.precompile(filepath, callback)
+### Precompile templates and partials: engine.precompile(filepath, [options], callback)
 
-  Compile handlebar-templates from file.
+  Precompile handlebar templates and partials from file.
 
 ```js
 var webexhbs = require('webexhbs'),
     engine = webexhbs.engine;
 
-engine.compile(filePath, function(err, template) { ... });
+engine.precompile(filePath, function(err, spec) { ... });
+```
+
+### Template from spec: engine.template(spec, callback)
+
+  Get template from precompile'd spec.
+
+```js
+var webexhbs = require('webexhbs'),
+    engine = webexhbs.engine;
+
+engine.template(spec, function(err, template) { ... });
 ```
 
 ## License
