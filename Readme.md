@@ -22,6 +22,7 @@ $ npm install webexhbs
   * Templating using [handlebars.js](https://github.com/wycats/handlebars.js)
   * Jade-like layout-blocks using [handlebars-layouts](https://github.com/shannonmoeller/handlebars-layouts)
   * Express JS compatible view rendering engine
+  * Precompile support for better performance
   * Redis based caching for multi-instance servers - TODO
   * Background template compilation - TODO
   * Client-side template-based redering support - TODO
@@ -105,6 +106,17 @@ app.engine('hbs', webexhbs.engine.renderFile);
 ```
 
 ### Compile templates: engine.compile(filepath, callback)
+
+  Compile handlebar-templates from file.
+
+```js
+var webexhbs = require('webexhbs'),
+    engine = webexhbs.engine;
+
+engine.compile(filePath, function(err, template) { ... });
+```
+
+### Precompile templates: engine.precompile(filepath, callback)
 
   Compile handlebar-templates from file.
 
