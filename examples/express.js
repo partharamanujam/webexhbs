@@ -1,36 +1,35 @@
 'use strict';
 
-var fs = require('fs'),
-    path = require('path'),
+var path = require('path'),
     express = require('express'),
-    webexhbs = require('../lib');
+    webexhbs = require('../lib'),
+    engine = webexhbs.engine;
 
-var hbs, app;
+var app;
 var pageData = {
     title: 'Layout Test',
-    items: [
-        'apple',
-        'orange',
-        'banana'
-    ]
+    items: ['apple', 'orange', 'banana']
 };
 
-// get handlebars instance
-hbs = webexhbs.engine.getInstance();
-
 // regsiter partial
-hbs.registerPartial('layout', fs.readFileSync(path.normalize(__dirname + '/layout.hbs'), 'utf8'));
+engine.registerPartial('layout', path.normalize(__dirname + '/partials/layout.hbs'),
+    function (err) {
+        if (err) {
+            console.error('An error occurred!');
+            return;
+        }
+        app = express();
 
-app = express();
+        app.set('view engine', 'hbs');
+        app.engine('hbs', webexhbs.engine.renderFile);
+        app.set('views', path.normalize(__dirname + '/views'));
 
-app.set('view engine', 'hbs');
-app.engine('hbs', webexhbs.engine.renderFile);
-app.set('views', path.normalize(__dirname));
+        app.get('/', function (req, res) {
+            res.render('home', pageData);
+        });
 
-app.get('/', function(req, res) {
-    res.render('home', pageData);
-});
-
-app.listen(8080);
+        app.listen(8080);
+    }
+);
 
 // access / from browser
