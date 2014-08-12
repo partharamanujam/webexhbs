@@ -16,10 +16,7 @@ waterfall(
             engine.registerPartial('layout', path.normalize(__dirname + '/partials/layout.hbs'), callback);
         },
         function (callback) {
-            engine.precompile(path.normalize(__dirname + '/views/home.hbs'), callback);
-        },
-        function (spec, callback) {
-            engine.template(spec, callback);
+            engine.compile(path.normalize(__dirname + '/views/home.hbs'), callback);
         },
         function (template, callback) {
             console.log(template(context));

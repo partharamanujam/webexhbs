@@ -114,6 +114,7 @@
         //"exampleVar",
         //"anotherCoolGlobal",
         //"iLoveDouglas"
+        setImmediate
     ],
     "indent"        : 4         // Specify indentation spacing
 }

@@ -30,8 +30,8 @@ $ npm install webexhbs
 ## Philosophy
 
   One of the many possible implementations of template-based rendering using Handlebars
-  for Express JS including support for layout-blocks and redis-based caching. Support
-  is also provided for client-side templating.
+  for Express JS, including support for layout-blocks and redis-based caching. Support
+  is also provided for browser/client-side templating.
 
 ## APIs
 
@@ -47,13 +47,24 @@ $ npm install webexhbs
 
   The handlebars module is export'ed from the main-module. This is only for any additional stuff
   you may want to do (e.g., use the Utils functions). However, if you want modify how the engine
-  behaves (e.g., registering partials), you will want to access the engine instance (see below).
+  behaves (e.g., registering partials), you will want to access the engine APIs (see below).
   
 
 ```js
 var webexhbs = require('webexhbs'),
     handlebars = webexhbs.handlebars;
 ```
+
+### Block-helpers for Jade-like layouts
+
+  The handlebars module supports Jade-like layouts by adding block-helpers.
+  * #extend - extend a defined partial
+  * #block - define a block within a partial
+  * #append - append to a defined block
+  * #prepend - prepend to a defined block
+  * #replace - replace a defined block
+
+  See standalone.js in examples for usage details.
 
 ### Handlebars engine
 
@@ -66,31 +77,27 @@ var express = require('express'),
     engine = webexhbs.engine;
 ```
 
-### Handlebars engine-instance: engine.getInstance()
+### Register Helpers: engine.registerHelper(name, filepath, callback)
 
-  The handlebars instance used by the engine is available via getInstance() call. This is useful
-  for standalone usage, or for modifying the behavior of the engine (e.g., registering custom 
-  partials or helpers, or any other aspects that handlebars supports).
+  Handlebar helpers can be registered with the engine using this API.
 
-```js
-var webexhbs = require('webexhbs'),
-    engine = webexhbs.engine;
+### Register Partials: engine.registerPartial(name, filepath, callback)
 
-var instance = engine.getInstance();
-instance.registerHelper('helper_name', function(...) { ... });
-instance.registerPartial('partial_name', 'partial value');
-```
+  Handlebar partials can be registered with the engine using this API.
 
-### Block-helpers for Jade-like layouts
+### Compile templates: engine.compile(filepath, [options], callback)
 
-  The handlebars engine-instance supports Jade-like layouts by adding block-helpers.
-  * #extend - extend a defined partial
-  * #block - define a block within a partial
-  * #append - append to a defined block
-  * #prepend - prepend to a defined block
-  * #replace - replace a defined block
+  Compile handlebar-templates from file.
+  See compile.js in examples folder for usage details.
 
-  See standalone.js in examples for usage details.
+### Precompile templates/partials to spec: engine.precompile(filepath, [options], callback)
+
+  Precompile handlebar templates and partials from file.
+
+### Template from spec: engine.template(spec, callback)
+
+  Get template from precompile'd spec.
+  See precompile.js in examples folder for usage details.
 
 ### Express JS view-engine: engine.renderFile
 
@@ -103,39 +110,6 @@ var express = require('express'),
 
 app = express();
 app.engine('hbs', webexhbs.engine.renderFile);
-```
-
-### Compile templates: engine.compile(filepath, [options], callback)
-
-  Compile handlebar-templates from file.
-
-```js
-var webexhbs = require('webexhbs'),
-    engine = webexhbs.engine;
-
-engine.compile(filePath, function(err, template) { ... });
-```
-
-### Precompile templates and partials: engine.precompile(filepath, [options], callback)
-
-  Precompile handlebar templates and partials from file.
-
-```js
-var webexhbs = require('webexhbs'),
-    engine = webexhbs.engine;
-
-engine.precompile(filePath, function(err, spec) { ... });
-```
-
-### Template from spec: engine.template(spec, callback)
-
-  Get template from precompile'd spec.
-
-```js
-var webexhbs = require('webexhbs'),
-    engine = webexhbs.engine;
-
-engine.template(spec, function(err, template) { ... });
 ```
 
 ## License
