@@ -94,24 +94,26 @@ var express = require('express'),
     engine = webexhbs.engine;
 ```
 
-### Register Helpers: engine.registerHelper(name, filepath, callback)
+### engine.registerHelper(name, helper, [callback])
 
   Handlebar helpers can be registered with the engine using this API.
+  See helper.js in examples folder for usage details.
 
-### Register Partials: engine.registerPartial(name, filepath, callback)
+### engine.registerPartial(name, filepath, callback)
 
   Handlebar partials can be registered with the engine using this API.
+  Note that this API provides a file-input interface (instead of a string).
 
-### Compile templates: engine.compile(filepath, [options], callback)
+### engine.compile(filepath, [options], callback)
 
-  Compile handlebar-templates from file.
+  Compile handlebar-templates using the engine.
   See compile.js in examples folder for usage details.
 
-### Precompile templates/partials to spec: engine.precompile(filepath, [options], callback)
+### engine.precompile(filepath, [options], callback)
 
   Precompile handlebar templates and partials from file.
 
-### Template from spec: engine.template(spec, callback)
+### engine.template(spec, callback)
 
   Get template from precompile'd spec.
   See precompile.js in examples folder for usage details.
