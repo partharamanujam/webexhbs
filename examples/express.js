@@ -11,13 +11,14 @@ var pageData = {
     items: ['apple', 'orange', 'banana']
 };
 
-// regsiter partial
+// regsiter partial(s)
 engine.registerPartial('layout', path.normalize(__dirname + '/partials/layout.hbs'),
     function (err) {
         if (err) {
             console.error('An error occurred!');
             return;
         }
+        // now run the express-app
         app = express();
 
         app.set('view engine', 'hbs');

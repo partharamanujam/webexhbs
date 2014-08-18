@@ -3,7 +3,24 @@
   Web Templating For Express JS Using Handlebars
 
 ```js
-TODO
+var webexhbs = require('../lib'),
+    handlebars = webexhbs.handlebars,
+    engine = webexhbs.engine;
+
+// handlebars for standalone usage
+handlebars.registerHelper(name, function () {});
+handlebars.registerPartial(name, 'partial');
+// and the rest as usual...
+
+// 'async' engine
+engine.registerHelper(name, filepath, callback);
+engine.registerPartial(name, filepath, callback);
+engine.compile(filepath, callback);
+engine.precompile(filepath, callback);
+engine.template(spec, callback);
+
+// Express JS view-engine
+expressapp.engine('hbs', webexhbs.engine.renderFile);
 ```
 
 ## Installation
