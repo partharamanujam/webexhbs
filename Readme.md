@@ -80,6 +80,7 @@ var webexhbs = require('webexhbs'),
   * #append - append to a defined block
   * #prepend - prepend to a defined block
   * #replace - replace a defined block
+  
 
   See standalone.js in examples for usage details.
 
