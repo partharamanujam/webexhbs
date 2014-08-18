@@ -13,7 +13,7 @@ handlebars.registerPartial(name, 'partial');
 // and the rest as usual...
 
 // 'async' engine
-engine.registerHelper(name, filepath, callback);
+engine.registerHelper(name, helper, callback);
 engine.registerPartial(name, filepath, callback);
 engine.compile(filepath, callback);
 engine.precompile(filepath, callback);
