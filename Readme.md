@@ -39,10 +39,10 @@ $ npm install webexhbs
   * Templating using [handlebars.js](https://github.com/wycats/handlebars.js)
   * Jade-like layout-blocks using [handlebars-layouts](https://github.com/shannonmoeller/handlebars-layouts)
   * Express JS compatible view rendering engine
-  * Precompile support for better performance
-  * Redis based caching for multi-instance servers - TODO
-  * Background template compilation - TODO
-  * Client-side template-based redering support - TODO
+  * Precompile support
+  * Background template compilation
+  * Browser/Client-side template-based rendering support - TODO
+  * Redis based view-caching for multi-instance servers - TODO
 
 ## Philosophy
 
@@ -94,6 +94,12 @@ var express = require('express'),
     engine = webexhbs.engine;
 ```
 
+### engine.enableLogging()
+
+  The handlebars engine logs messages using handlebars-logger. These messages may be useful
+  for debugging purposes.
+  See eexpress.js in examples folder for usage details.
+
 ### engine.registerHelper(name, helper, [callback])
 
   Handlebar helpers can be registered with the engine using this API.
@@ -117,6 +123,13 @@ var express = require('express'),
 
   Get template from precompile'd spec.
   See precompile.js in examples folder for usage details.
+
+### engine.registerPartialsDir(dirpath, callback)
+
+  The handlebars engine provides an API for registering all files as partials from a
+  specified directory. The files within the directory are watch'ed for changes, and
+  are automatically updated within the engine.
+  See express.js in examples folder for usage details.
 
 ### Express JS view-engine: engine.renderFile
 

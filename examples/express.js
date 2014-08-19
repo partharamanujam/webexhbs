@@ -11,8 +11,11 @@ var pageData = {
     items: ['apple', 'orange', 'banana']
 };
 
-// regsiter partial(s)
-engine.registerPartial('layout', path.normalize(__dirname + '/partials/layout.hbs'),
+// enable logging
+engine.enableLogging();
+
+// regsiter partials from dir
+engine.registerPartialsDir(path.normalize(__dirname + '/partials'),
     function (err) {
         if (err) {
             console.error('An error occurred!');
@@ -28,6 +31,10 @@ engine.registerPartial('layout', path.normalize(__dirname + '/partials/layout.hb
         app.get('/', function (req, res) {
             res.render('home', pageData);
         });
+
+//        app.get('/handlebars.runtime.js', function (req, res) {
+//            engine.sendBrowserRuntime(res);
+//        });
 
         app.listen(8080);
     }
