@@ -32,31 +32,33 @@ $ npm install webexhbs
 ### Installation Dependencies
 
   * Node JS (v0.10.29+) - http://www.nodejs.org
-  * Redis (v2.6.12+) - http://redis.io
+  * Redis (v2.6.12+) - http://redis.io [optional]
 
 ## Features
 
   * Templating using [handlebars.js](https://github.com/wycats/handlebars.js)
   * Jade-like layout-blocks using [handlebars-layouts](https://github.com/shannonmoeller/handlebars-layouts)
   * Express JS compatible view rendering engine
-  * Precompile support
+  * Precompile & Caching support
   * Background template compilation
-  * Browser/Client-side template-based rendering support - TODO
-  * Redis based view-caching for multi-instance servers - TODO
+
+## Future Roadmap (TODO)
+
+  * Browser/Client-side template-based rendering support
+  * Optional Redis based view-caching for multi-instance servers
 
 ## Philosophy
 
   One of the many possible implementations of template-based rendering using Handlebars
-  for Express JS, including support for layout-blocks and redis-based caching. Support
-  is also provided for browser/client-side templating.
+  for Express JS, including support for layout-blocks and optional redis based view-caching.
+  Support is also provided for browser/client-side templating.
 
 ## APIs
 
 ### Overview
 
   This module adds on top of handlebars.js to provide a standalone as well as an Express JS 
-  compatible middleware to render web-page templates. It uses redis for caching templates to
-  enable multi-server environments.
+  compatible middleware to render handlebars template-based web-page.
 
   See examples folder for usage of different features.
 
@@ -98,7 +100,7 @@ var express = require('express'),
 
   The handlebars engine logs messages using handlebars-logger. These messages may be useful
   for debugging purposes.
-  See eexpress.js in examples folder for usage details.
+  See express.js in examples folder for usage details.
 
 ### engine.registerHelper(name, helper, [callback])
 
@@ -131,9 +133,18 @@ var express = require('express'),
   are automatically updated within the engine.
   See express.js in examples folder for usage details.
 
+### engine.registerViewsDir(dirpath, callback)
+
+  The handlebars engine provides an API for registering all files as views from a
+  specified directory. The files within the directory are watch'ed for changes, and
+  are automatically updated within the engine.
+  See express.js in examples folder for usage details.
+
 ### Express JS view-engine: engine.renderFile
 
   Use engine.renderFile as the view-engine for Express JS  environment.
+  Both the views-dir and partials-dir, when registered, are monitored for
+  changes; these changes are updated automatically. 
 
 ```js
 var express = require('express'),

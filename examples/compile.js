@@ -18,8 +18,8 @@ waterfall(
         function (callback) {
             engine.compile(path.normalize(__dirname + '/views/home.hbs'), callback);
         },
-        function (template, callback) {
-            console.log(template(context));
+        function (templFunc, callback) {
+            console.log(templFunc(context));
             callback(null);
         }
     ],
