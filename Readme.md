@@ -1,5 +1,3 @@
-# INCOMPLETE - THIS IS WORK IN PROGRESS
-
   Web Templating For Express JS Using Handlebars
 
 ```js
