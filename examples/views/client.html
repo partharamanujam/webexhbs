@@ -1,0 +1,35 @@
+<!doctype html>
+<html lang="en-us">
+
+<head>
+    <title>Client Template Test</title>
+    <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+    <script src="/libs/handlebars.runtime.min.js"></script>
+
+    <script>
+        function loadPartial() {
+            var context = {
+                items: ['apple', 'orange', 'banana']
+            };
+            $.ajax({
+                url: '/partials/list',
+                dataType: "script",
+                success: function () {
+                    document.getElementById("list").innerHTML = Handlebars.partials.list(context);
+                },
+                error: function () {
+                    alert("error getting partial");
+                }
+            });
+        }
+    </script>
+</head>
+
+<body onload="loadPartial()">
+    <h1>Layout Test</h1>
+    <h2>Welcome Home</h2>
+    <div id="list"></div>
+</body>
+
+</html>
+

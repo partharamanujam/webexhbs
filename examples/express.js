@@ -20,6 +20,9 @@ waterfall(
             engine.registerPartialsDir(path.normalize(__dirname + '/partials'), callback);
         },
         function (callback) {
+            engine.registerClientPartialsDir(path.normalize(__dirname + '/partials'), callback);
+        },
+        function (callback) {
             engine.registerViewsDir(path.normalize(__dirname + '/views'), callback);
         },
         function (callback) {
@@ -33,6 +36,16 @@ waterfall(
                 res.render('home', homeData);
             });
 
+            app.get('/libs/handlebars.runtime.min.js', function (req, res) {
+                engine.sendBrowserRuntime(res);
+            });
+            app.get('/partials/list', function (req, res) {
+                engine.sendClientPartial(res, 'list');
+            });
+            app.get('/client', function (req, res) {
+                res.sendfile(path.normalize(__dirname + '/views/client.html'));
+            });
+
             app.listen(8080);
         }
     ],
@@ -42,4 +55,4 @@ waterfall(
         }
     });
 
-// access /server from browser
+// access /server and /client from browser

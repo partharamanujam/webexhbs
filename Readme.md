@@ -39,10 +39,10 @@ $ npm install webexhbs
   * Express JS compatible view rendering engine
   * Precompile & Caching support
   * Background template compilation
+  * Browser/Client-side template-based rendering support
 
 ## Future Roadmap (TODO)
 
-  * Browser/Client-side template-based rendering support
   * Optional Redis based view-caching for multi-instance servers
 
 ## Philosophy
@@ -75,10 +75,10 @@ var webexhbs = require('webexhbs'),
 ### Block-helpers for Jade-like layouts
 
   The handlebars module supports Jade-like layouts by adding block-helpers.
-  * #extend - extend a defined partial
-  * #block - define a block within a partial
-  * #append - append to a defined block
-  * #prepend - prepend to a defined block
+  * \#extend - extend a defined partial
+  * \#block - define a block within a partial
+  * \#append - append to a defined block
+  * \#prepend - prepend to a defined block
   * \#replace - replace a defined block
 
   See standalone.js in examples for usage details.
@@ -152,6 +152,23 @@ var express = require('express'),
 app = express();
 app.engine('hbs', webexhbs.engine.renderFile);
 ```
+
+### engine.sendBrowserRuntime(res)
+
+  Handlebars provides a runtime for client/browser side templating without the overheads 
+  for compiling templates. This engine provides an API for hosting the minified version
+  of handlebars-runtime via this API.
+  See express.js in examples folder for usage details.
+
+### engine.registerClientPartialsDir(dirpath, callback)
+
+  The handlebars engine provides an API for registering all files as partials from a
+  specified directory for use with the client/browser. The files within the directory
+  are watch'ed for changes, and are automatically updated within the engine. The 
+  compiled partials when included are available as items in Handlebars.partials 
+  variable of the included handlebars-runtime. To use templating feature from the browser,
+  the handlebars-runtime is needs to be included (see above).
+  See express.js in examples folder for usage details.
 
 ## License
 
