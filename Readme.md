@@ -1,4 +1,10 @@
-  Web Templating For Express JS Using Handlebars
+#### Important Note on XSS Vulnerability
+
+The version of Handlebars (v1.3.x) used within this module may be susceptable to XSS Vulnerability.
+
+
+
+## Web Templating For Express JS Using Handlebars
 
 ```js
 var webexhbs = require('../lib'),
